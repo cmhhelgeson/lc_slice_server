@@ -212,7 +212,10 @@ await server.start();
 
 //Cors Options
 const corsOptions: cors.CorsOptions = {
-  origin: true,
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }
 
 //Apply express middleware
