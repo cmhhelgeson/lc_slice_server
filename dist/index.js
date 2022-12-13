@@ -168,6 +168,7 @@ const mockedSchema = addMocksToSchema({
 //Apply schema and plugins to server
 const server = new ApolloServer({
     schema: schema,
+    introspection: true,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
 });
 await AppDataSource.initialize().then(async () => {

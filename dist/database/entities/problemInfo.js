@@ -19,7 +19,7 @@ __decorate([
     __metadata("design:type", Number)
 ], ProblemInfoORM.prototype, "problemNumber", void 0);
 __decorate([
-    Column(),
+    Column({ unique: true }),
     __metadata("design:type", String)
 ], ProblemInfoORM.prototype, "title", void 0);
 __decorate([

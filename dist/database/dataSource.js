@@ -17,9 +17,10 @@ import { ProblemInfoORM } from "./entities/problemInfo.js";
 }) */
 //Setup for railway deployment
 export const AppDataSource = new DataSource({
+    url: `${process.env.DATABASE_URL}`,
     type: "postgres",
-    host: "localhost",
-    port: 5432,
+    host: `${process.env.PGHOST}`,
+    port: parseInt(process.env.PGPORT),
     username: `${process.env.PGUSER}`,
     password: `${process.env.PGPASSWORD}`,
     database: `${process.env.PGDATABASE}`,
