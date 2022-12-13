@@ -23,7 +23,7 @@ import { psqlPassword, psqlUsername, psqlDatabase} from "./envVars.js"
 //Setup for railway deployment
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
+  host: `${process.env.PGHOST}`,
   port: parseInt(process.env.PGPORT),
   username: `${process.env.PGUSER}`,
   password: `${process.env.PGPASSWORD}`,
