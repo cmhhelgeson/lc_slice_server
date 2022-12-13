@@ -45,6 +45,8 @@ import {
   subscribers: [],
 }) */
 
+console.log(process.env);
+
 export const AppDataSource = new DataSource({
   url: process.env.DATABASE_URL,
   type: "postgres",
