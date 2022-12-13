@@ -220,7 +220,7 @@ const corsOptions: cors.CorsOptions = {
 
 //Apply express middleware
 app.use(
-  '/',
+  '/graphql',
   cors<cors.CorsRequest>(corsOptions),
   json(),
   expressMiddleware(server, {
