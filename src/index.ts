@@ -23,6 +23,7 @@ import { GridInterpreter, GridORM} from './database/entities/grids.js';
 import {ProblemInfoORM} from './database/entities/problemInfo.js';
 import { createProblemInfoORM } from './database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
+import {PGPORT} from "./database/environment/envVars.js"
 
 
 interface MyContext {
