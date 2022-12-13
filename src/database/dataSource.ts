@@ -2,7 +2,17 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { GridORM} from "./entities/grids.js"
 import { ProblemInfoORM } from "./entities/problemInfo.js"
-import { psqlPassword, psqlUsername, psqlDatabase} from "./environment/envVars.js"
+import { 
+  psqlPassword, 
+  psqlUsername, 
+  psqlDatabase,
+  DATABASE_URL,
+  PGPASSWORD,
+  PGPORT,
+  PGUSER,
+  PGDATABASE,
+  PGHOST
+} from "./environment/envVars.js"
 
 
 /* export const AppDataSource = new DataSource({
@@ -21,13 +31,13 @@ import { psqlPassword, psqlUsername, psqlDatabase} from "./environment/envVars.j
 
 //Setup for railway deployment
 export const AppDataSource = new DataSource({
-  url: `${process.env.DATABASE_URL}`,
+  url: DATABASE_URL,
   type: "postgres",
-  host: `${process.env.PGHOST}`,
-  port: parseInt(process.env.PGPORT),
-  username: `${process.env.PGUSER}`,
-  password: `${process.env.PGPASSWORD}`,
-  database: `${process.env.PGDATABASE}`,
+  host: PGHOST,
+  port: parseInt(PGPORT),
+  username: PGUSER,
+  password: PGPASSWORD,
+  database: PGDATABASE,
   synchronize: true,
   logging: true,
   entities: [GridORM, ProblemInfoORM],
