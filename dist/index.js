@@ -184,7 +184,7 @@ const corsOptions = {
     optionsSuccessStatus: 204
 };
 //Apply express middleware
-app.use('/', cors(corsOptions), json(), expressMiddleware(server, {
+app.use('/graphql', cors(corsOptions), json(), expressMiddleware(server, {
     context: async () => ({ dataSource: AppDataSource })
 }));
 const port = Number.parseInt(process.env.PORT) || 8000;
