@@ -2,7 +2,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { GridORM} from "./entities/grids.js"
 import { ProblemInfoORM } from "./entities/problemInfo.js"
-import { psqlPassword, psqlUsername, psqlDatabase} from "./envVars.js"
+import { psqlPassword, psqlUsername, psqlDatabase} from "./environment/envVars.js"
 
 
 /* export const AppDataSource = new DataSource({
@@ -19,9 +19,9 @@ import { psqlPassword, psqlUsername, psqlDatabase} from "./envVars.js"
     subscribers: [],
 }) */
 
-
 //Setup for railway deployment
 export const AppDataSource = new DataSource({
+  url: `${process.env.DATABASE_URL}`,
   type: "postgres",
   host: `${process.env.PGHOST}`,
   port: parseInt(process.env.PGPORT),
