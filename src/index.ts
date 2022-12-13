@@ -198,6 +198,7 @@ const mockedSchema = addMocksToSchema({
 //Apply schema and plugins to server
 const server = new ApolloServer<MyContext>({
   schema: schema,
+  introspection: true,
   plugins: [ApolloServerPluginDrainHttpServer({httpServer})]
 });
 

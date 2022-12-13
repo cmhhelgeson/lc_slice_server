@@ -24,7 +24,7 @@ import { psqlPassword, psqlUsername, psqlDatabase} from "./envVars.js"
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
-  port: 5432,
+  port: parseInt(process.env.PGPORT),
   username: `${process.env.PGUSER}`,
   password: `${process.env.PGPASSWORD}`,
   database: `${process.env.PGDATABASE}`,

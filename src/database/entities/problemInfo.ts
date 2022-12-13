@@ -8,7 +8,7 @@ export class ProblemInfoORM {
     @Column("int", {unique: true})
     problemNumber: number
 
-    @Column()
+    @Column({unique: true})
     title: string
 
     @Column()
