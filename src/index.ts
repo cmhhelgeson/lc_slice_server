@@ -212,7 +212,7 @@ await server.start();
 
 //Cors Options
 const corsOptions: cors.CorsOptions = {
-  origin: ["https://cmhhelgeson.github.io/lc_slice/", "http://localhost:3000"]
+  origin: true,
 }
 
 //Apply express middleware
