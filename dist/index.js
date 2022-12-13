@@ -176,8 +176,12 @@ await AppDataSource.initialize().then(async () => {
 }).catch(error => console.log(error));
 //Start server
 await server.start();
+//Cors Options
+const corsOptions = {
+    origin: ["https://cmhhelgeson.github.io/lc_slice/", "http://localhost:3000"]
+};
 //Apply express middleware
-app.use('/graphql', cors(), json(), expressMiddleware(server, {
+app.use('/graphql', cors(corsOptions), json(), expressMiddleware(server, {
     context: async () => ({ dataSource: AppDataSource })
 }));
 const port = Number.parseInt(process.env.PORT) || 8000;

@@ -210,10 +210,15 @@ await AppDataSource.initialize().then(async () => {
 //Start server
 await server.start();
 
+//Cors Options
+const corsOptions: cors.CorsOptions = {
+  origin: ["https://cmhhelgeson.github.io/lc_slice/", "http://localhost:3000"]
+}
+
 //Apply express middleware
 app.use(
   '/graphql',
-  cors<cors.CorsRequest>(),
+  cors<cors.CorsRequest>(corsOptions),
   json(),
   expressMiddleware(server, {
     context: async () => ({dataSource: AppDataSource})
