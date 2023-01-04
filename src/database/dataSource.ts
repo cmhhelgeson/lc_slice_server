@@ -15,49 +15,19 @@ import {
 } from "./environment/envVars.js"
 
 
-/*export const AppDataSource = new DataSource({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: `${psqlUsername}`,
-    password: `${psqlPassword}`,
-    database: `${psqlDatabase}`,
-    synchronize: false,
-    logging: true,
-    entities: [GridORM, ProblemInfoORM],
-    migrations: [],
-    subscribers: [],
-}) */
-
-//Setup for railway deployment
-/*export const AppDataSource = new DataSource({
-  url: DATABASE_URL,
-  type: "postgres",
-  host: PGHOST,
-  port: parseInt(PGPORT),
-  username: PGUSER,
-  password: PGPASSWORD,
-  database: PGDATABASE,
-  synchronize: true,
-  logging: true,
-  entities: [GridORM, ProblemInfoORM],
-  migrations: [],
-  subscribers: [],
-}) */
-
 console.log(process.env);
 
 export const AppDataSource = new DataSource({
-  url: process.env.DATABASE_URL,
+  url: process.env.DATABASE_URL || DATABASE_URL,
   type: "postgres",
-  host: process.env.PGHOST,
-  port: parseInt(process.env.PGPORT),
-  username: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  database: process.env.PGDATABASE,
+  host: process.env.PGHOST || PGHOST,
+  port: parseInt(process.env.PGPORT) || parseInt(PGPORT),
+  username: process.env.PGUSER || PGUSER,
+  password: process.env.PGPASSWORD || PGPASSWORD,
+  database: process.env.PGDATABASE || PGDATABASE,
   synchronize: false,
   logging: true,
   entities: [GridORM, ProblemInfoORM],
   migrations: [],
   subscribers: [],
-}) 
+})
