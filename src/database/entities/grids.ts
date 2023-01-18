@@ -1,11 +1,7 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
+import { GridInterpreter } from "__generated__/resolvers-types"
 
-export enum GridInterpreter {
-  NUMBER = "NUMBER",
-  BOOLEAN = "BOOLEAN",
-  NORMALIZED = "NORMALIZED",
-  ALPHABET = "ALPHABET"
-}
+
 
 @Entity({name: "grids"})
 @Unique(["problemNumber", "gridData"])
@@ -31,7 +27,7 @@ export class GridORM {
     @Column({
       type: "enum",
       enum: GridInterpreter,
-      default: GridInterpreter.NUMBER
+      default: GridInterpreter.Number
     })
     interpretAs: GridInterpreter
 

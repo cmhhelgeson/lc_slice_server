@@ -1,37 +1,31 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
-
-export enum ArrayInterpreter {
-  NUMBER = "NUMBER",
-  BOOLEAN = "BOOLEAN",
-  NORMALIZED = "NORMALIZED",
-  ALPHABET = "ALPHABET"
-}
+import { ArrayInterpreter, ArrayType} from "__generated__/resolvers-types"
 
 @Entity({name: "arrays"})
 @Unique(["problemNumber", "arrayData"])
 export class ArrayORM {
     @PrimaryGeneratedColumn("uuid")
-    arrayId: string
+    arrayId: ArrayType["arrayId"]
 
     @Column("int")
-    problemNumber: number
+    problemNumber: ArrayType["problemNumber"]
 
     @Column("int")
-    fromExample: number
+    fromExample: ArrayType["fromExample"]
 
     @Column("int")
-    exampleIndex: number
+    exampleIndex: ArrayType["exampleIndex"]
 
     @Column({length: 255})
-    label: string
+    label: ArrayType["label"]
 
     @Column("int", {array: true})
-    arrayData: number[]
+    arrayData: ArrayType["arrayData"]
 
     @Column({
       type: "enum",
       enum: ArrayInterpreter,
-      default: ArrayInterpreter.NUMBER
+      default: ArrayInterpreter.Number
     })
     interpretAs: ArrayInterpreter
 }

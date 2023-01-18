@@ -1,11 +1,13 @@
 export var ArrayInterpreter;
 (function (ArrayInterpreter) {
+    ArrayInterpreter["Alphabet"] = "ALPHABET";
     ArrayInterpreter["Boolean"] = "BOOLEAN";
     ArrayInterpreter["Normalized"] = "NORMALIZED";
     ArrayInterpreter["Number"] = "NUMBER";
 })(ArrayInterpreter || (ArrayInterpreter = {}));
 export var GridInterpreter;
 (function (GridInterpreter) {
+    GridInterpreter["Alphabet"] = "ALPHABET";
     GridInterpreter["Boolean"] = "BOOLEAN";
     GridInterpreter["Normalized"] = "NORMALIZED";
     GridInterpreter["Number"] = "NUMBER";

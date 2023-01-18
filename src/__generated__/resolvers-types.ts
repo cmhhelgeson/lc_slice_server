@@ -43,6 +43,7 @@ export type AddProblemInput = {
 };
 
 export enum ArrayInterpreter {
+  Alphabet = 'ALPHABET',
   Boolean = 'BOOLEAN',
   Normalized = 'NORMALIZED',
   Number = 'NUMBER'
@@ -78,6 +79,7 @@ export type Grid = {
 };
 
 export enum GridInterpreter {
+  Alphabet = 'ALPHABET',
   Boolean = 'BOOLEAN',
   Normalized = 'NORMALIZED',
   Number = 'NUMBER'

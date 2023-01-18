@@ -2,8 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import {expressMiddleware} from "@apollo/server/express4"
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { readFileSync } from 'fs';
-import { Post, Resolvers, User, Grid} from '__generated__/resolvers-types';
-import { ArrayInterpreter } from 'database/entities/arrays.js';
+import { Post, Resolvers, User, Grid, GridInterpreter, ArrayInterpreter} from '__generated__/resolvers-types';
 import http from 'http'
 import cors from "cors"
 import express from "express"
@@ -20,7 +19,7 @@ import {
 //NOTE: Node.js does not allow directory imports
 import { AppDataSource } from "./database/dataSource.js"
 import localDatabase from './localDatabase.js';
-import { GridInterpreter, GridORM} from './database/entities/grids.js';
+import {GridORM} from './database/entities/grids.js';
 import {ProblemInfoORM} from './database/entities/problemInfo.js';
 import { createProblemInfoORM } from './database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
@@ -132,7 +131,7 @@ const resolvers: Resolvers = {
         grid.exampleIndex = 0;
         grid.fromExample = problem.numExamples;
         grid.label = "Test Label";
-        grid.interpretAs = "NUMBER" as GridInterpreter;
+        grid.interpretAs = interpretAs;
         await contextValue.dataSource.manager.save(grid);
         await contextValue.dataSource
           .createQueryBuilder()
@@ -164,7 +163,7 @@ const resolvers: Resolvers = {
         arr.exampleIndex = 0;
         arr.fromExample = problem.numExamples;
         arr.label = label;
-        arr.interpretAs = "NUMBER" as ArrayInterpreter;
+        arr.interpretAs = interpretAs;
 
         await contextValue.dataSource.manager.save(arr);
         await contextValue.dataSource
