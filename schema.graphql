@@ -86,12 +86,14 @@ enum GridInterpreter {
   NUMBER 
   BOOLEAN 
   NORMALIZED
+  ALPHABET
 }
 
 enum ArrayInterpreter {
   NUMBER
   BOOLEAN
   NORMALIZED
+  ALPHABET
 }
 
 input AddProblemInput {
