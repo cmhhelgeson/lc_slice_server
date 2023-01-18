@@ -38,7 +38,12 @@ __decorate([
 __decorate([
     Column({
         type: "enum",
-        enum: GridInterpreter,
+        enum: [
+            GridInterpreter.NUMBER,
+            GridInterpreter.ALPHABET,
+            GridInterpreter.NORMALIZED,
+            GridInterpreter.BOOLEAN
+        ],
         default: GridInterpreter.NUMBER
     }),
     __metadata("design:type", String)
