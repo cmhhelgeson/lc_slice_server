@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import {expressMiddleware} from "@apollo/server/express4"
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { readFileSync } from 'fs';
-import { Post, Resolvers, User, Grid, GridInterpreter, ArrayInterpreter} from '__generated__/resolvers-types';
+import {Resolvers, Grid, GridInterpreter, ArrayInterpreter} from '__generated__/resolvers-types';
 import http from 'http'
 import cors from "cors"
 import express from "express"
@@ -18,7 +18,6 @@ import {
 
 //NOTE: Node.js does not allow directory imports
 import { AppDataSource } from "./database/dataSource.js"
-import localDatabase from './localDatabase.js';
 import {GridORM} from './database/entities/grids.js';
 import {ProblemInfoORM} from './database/entities/problemInfo.js';
 import { createProblemInfoORM } from './database/utils/ormUtils.js';

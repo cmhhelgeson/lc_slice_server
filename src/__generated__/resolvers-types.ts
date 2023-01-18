@@ -119,17 +119,6 @@ export type MutationUpdateTitleArgs = {
   input: UpdateTitleInput;
 };
 
-export type Post = {
-  __typename?: 'Post';
-  author?: Maybe<User>;
-  authorID: Scalars['ID'];
-  body: Scalars['String'];
-  id: Scalars['ID'];
-  published: Scalars['Boolean'];
-  title: Scalars['String'];
-  views?: Maybe<Scalars['NonNegativeInt']>;
-};
-
 export type ProblemInfo = {
   __typename?: 'ProblemInfo';
   arrays?: Maybe<Array<Maybe<ArrayType>>>;
@@ -158,9 +147,7 @@ export type Query = {
   __typename?: 'Query';
   arrays?: Maybe<Array<Maybe<ArrayType>>>;
   grids?: Maybe<Array<Maybe<Grid>>>;
-  posts?: Maybe<Array<Maybe<Post>>>;
   problem?: Maybe<ProblemInfo>;
-  users?: Maybe<Array<Maybe<User>>>;
 };
 
 
@@ -176,17 +163,6 @@ export type UpdateDescriptionInput = {
 export type UpdateTitleInput = {
   newTitle: Scalars['String'];
   problemNumber: Scalars['PositiveInt'];
-};
-
-export type User = {
-  __typename?: 'User';
-  age?: Maybe<Scalars['PositiveFloat']>;
-  email?: Maybe<Scalars['EmailAddress']>;
-  firstName: Scalars['String'];
-  id: Scalars['ID'];
-  lastName: Scalars['String'];
-  name: Scalars['String'];
-  posts?: Maybe<Array<Maybe<Post>>>;
 };
 
 export enum ValidTypes {
@@ -280,14 +256,12 @@ export type ResolversTypes = {
   NonNegativeInt: ResolverTypeWrapper<Scalars['NonNegativeInt']>;
   PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']>;
   PositiveInt: ResolverTypeWrapper<Scalars['PositiveInt']>;
-  Post: ResolverTypeWrapper<Post>;
   ProblemInfo: ResolverTypeWrapper<ProblemInfo>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
   UpdateDescriptionInput: UpdateDescriptionInput;
   UpdateTitleInput: UpdateTitleInput;
-  User: ResolverTypeWrapper<User>;
   ValidTypes: ValidTypes;
 };
 
@@ -307,14 +281,12 @@ export type ResolversParentTypes = {
   NonNegativeInt: Scalars['NonNegativeInt'];
   PositiveFloat: Scalars['PositiveFloat'];
   PositiveInt: Scalars['PositiveInt'];
-  Post: Post;
   ProblemInfo: ProblemInfo;
   Query: {};
   String: Scalars['String'];
   UUID: Scalars['UUID'];
   UpdateDescriptionInput: UpdateDescriptionInput;
   UpdateTitleInput: UpdateTitleInput;
-  User: User;
 };
 
 export type ArrayTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArrayType'] = ResolversParentTypes['ArrayType']> = {
@@ -370,17 +342,6 @@ export interface PositiveIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'PositiveInt';
 }
 
-export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
-  author?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  authorID?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  published?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  views?: Resolver<Maybe<ResolversTypes['NonNegativeInt']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type ProblemInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProblemInfo'] = ResolversParentTypes['ProblemInfo']> = {
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType, Partial<ProblemInfoArraysArgs>>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -398,25 +359,12 @@ export type ProblemInfoResolvers<ContextType = any, ParentType extends Resolvers
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
   problem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, Partial<QueryProblemArgs>>;
-  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
 };
 
 export interface UuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['UUID'], any> {
   name: 'UUID';
 }
-
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  age?: Resolver<Maybe<ResolversTypes['PositiveFloat']>, ParentType, ContextType>;
-  email?: Resolver<Maybe<ResolversTypes['EmailAddress']>, ParentType, ContextType>;
-  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
 
 export type Resolvers<ContextType = any> = {
   ArrayType?: ArrayTypeResolvers<ContextType>;
@@ -427,10 +375,8 @@ export type Resolvers<ContextType = any> = {
   NonNegativeInt?: GraphQLScalarType;
   PositiveFloat?: GraphQLScalarType;
   PositiveInt?: GraphQLScalarType;
-  Post?: PostResolvers<ContextType>;
   ProblemInfo?: ProblemInfoResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   UUID?: GraphQLScalarType;
-  User?: UserResolvers<ContextType>;
 };
 
