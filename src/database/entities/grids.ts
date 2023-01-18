@@ -24,12 +24,7 @@ export class GridORM {
 
     @Column({
       type: "enum",
-      enum: [
-          GridInterpreter.NUMBER, 
-          GridInterpreter.ALPHABET,
-          GridInterpreter.NORMALIZED,
-          GridInterpreter.BOOLEAN
-      ],
+      enum: GridInterpreter,
       default: GridInterpreter.NUMBER
     })
     interpretAs: GridInterpreter
