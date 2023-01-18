@@ -23,7 +23,7 @@ import {ProblemInfoORM} from './database/entities/problemInfo.js';
 import { createProblemInfoORM } from './database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from './database/entities/arrays.js';
-import { execSchema } from 'execSchema/execSchema.js';
+import { execSchema } from './execSchema/execSchema.js';
 
 
 interface MyContext {
