@@ -8,44 +8,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Entity, Unique, PrimaryGeneratedColumn, Column } from "typeorm";
-export var ArrayInterpreter;
-(function (ArrayInterpreter) {
-    ArrayInterpreter["NUMBER"] = "NUMBER";
-    ArrayInterpreter["BOOLEAN"] = "BOOLEAN";
-    ArrayInterpreter["NORMALIZED"] = "NORMALIZED";
-    ArrayInterpreter["ALPHABET"] = "ALPHABET";
-})(ArrayInterpreter || (ArrayInterpreter = {}));
+import { ArrayInterpreter } from "../../__generated__/resolvers-types.js";
 let ArrayORM = class ArrayORM {
 };
 __decorate([
     PrimaryGeneratedColumn("uuid"),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "arrayId", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "problemNumber", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "fromExample", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "exampleIndex", void 0);
 __decorate([
     Column({ length: 255 }),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "label", void 0);
 __decorate([
     Column("int", { array: true }),
-    __metadata("design:type", Array)
+    __metadata("design:type", Object)
 ], ArrayORM.prototype, "arrayData", void 0);
 __decorate([
     Column({
         type: "enum",
         enum: ArrayInterpreter,
-        default: ArrayInterpreter.NUMBER
+        default: ArrayInterpreter.Number
     }),
     __metadata("design:type", String)
 ], ArrayORM.prototype, "interpretAs", void 0);

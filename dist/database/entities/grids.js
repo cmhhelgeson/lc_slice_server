@@ -8,13 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Entity, Unique, PrimaryGeneratedColumn, Column } from "typeorm";
-export var GridInterpreter;
-(function (GridInterpreter) {
-    GridInterpreter["NUMBER"] = "NUMBER";
-    GridInterpreter["BOOLEAN"] = "BOOLEAN";
-    GridInterpreter["NORMALIZED"] = "NORMALIZED";
-    GridInterpreter["ALPHABET"] = "ALPHABET";
-})(GridInterpreter || (GridInterpreter = {}));
+import { GridInterpreter } from "../../__generated__/resolvers-types.js";
 let GridORM = class GridORM {
 };
 __decorate([
@@ -45,7 +39,7 @@ __decorate([
     Column({
         type: "enum",
         enum: GridInterpreter,
-        default: GridInterpreter.NUMBER
+        default: GridInterpreter.Number
     }),
     __metadata("design:type", String)
 ], GridORM.prototype, "interpretAs", void 0);

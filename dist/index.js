@@ -109,7 +109,7 @@ const resolvers = {
                 grid.exampleIndex = 0;
                 grid.fromExample = problem.numExamples;
                 grid.label = "Test Label";
-                grid.interpretAs = "NUMBER";
+                grid.interpretAs = interpretAs;
                 await contextValue.dataSource.manager.save(grid);
                 await contextValue.dataSource
                     .createQueryBuilder()
@@ -137,7 +137,7 @@ const resolvers = {
                 arr.exampleIndex = 0;
                 arr.fromExample = problem.numExamples;
                 arr.label = label;
-                arr.interpretAs = "NUMBER";
+                arr.interpretAs = interpretAs;
                 await contextValue.dataSource.manager.save(arr);
                 await contextValue.dataSource
                     .createQueryBuilder()

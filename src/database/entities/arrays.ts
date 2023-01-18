@@ -1,5 +1,5 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
-import { ArrayInterpreter, ArrayType} from "__generated__/resolvers-types"
+import { ArrayInterpreter, ArrayType} from "../../__generated__/resolvers-types.js"
 
 @Entity({name: "arrays"})
 @Unique(["problemNumber", "arrayData"])
