@@ -39,7 +39,7 @@ __decorate([
     Column({
         type: "enum",
         enum: GridInterpreter,
-        default: GridInterpreter.Number
+        default: GridInterpreter.NUMBER
     }),
     __metadata("design:type", String)
 ], GridORM.prototype, "interpretAs", void 0);

@@ -39,7 +39,7 @@ __decorate([
     Column({
         type: "enum",
         enum: ArrayInterpreter,
-        default: ArrayInterpreter.Number
+        default: ArrayInterpreter.NUMBER
     }),
     __metadata("design:type", String)
 ], ArrayORM.prototype, "interpretAs", void 0);

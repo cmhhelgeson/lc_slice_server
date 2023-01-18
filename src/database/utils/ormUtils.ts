@@ -9,9 +9,9 @@ export const createProblemInfoORM = (
   problem.problemNumber = problemNumber;
   problem.title = title;
   problem.description = description;
-  problem.hasGraphs = dataTypes.includes(ValidTypes.Graph);
-  problem.hasArrays = dataTypes.includes(ValidTypes.Array);
-  problem.hasGrids = dataTypes.includes(ValidTypes.Grid);
+  problem.hasGraphs = dataTypes.includes(ValidTypes.GRAPH);
+  problem.hasArrays = dataTypes.includes(ValidTypes.ARRAY);
+  problem.hasGrids = dataTypes.includes(ValidTypes.GRID);
   problem.numExamples = 0;
   return problem;
 }

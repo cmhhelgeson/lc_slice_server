@@ -25,7 +25,7 @@ export class GridORM {
     @Column({
       type: "enum",
       enum: GridInterpreter,
-      default: GridInterpreter.Number
+      default: GridInterpreter.NUMBER
     })
     interpretAs: GridInterpreter
 

@@ -1,20 +1,20 @@
 export var ArrayInterpreter;
 (function (ArrayInterpreter) {
-    ArrayInterpreter["Alphabet"] = "ALPHABET";
-    ArrayInterpreter["Boolean"] = "BOOLEAN";
-    ArrayInterpreter["Normalized"] = "NORMALIZED";
-    ArrayInterpreter["Number"] = "NUMBER";
+    ArrayInterpreter["ALPHABET"] = "ALPHABET";
+    ArrayInterpreter["BOOLEAN"] = "BOOLEAN";
+    ArrayInterpreter["NORMALIZED"] = "NORMALIZED";
+    ArrayInterpreter["NUMBER"] = "NUMBER";
 })(ArrayInterpreter || (ArrayInterpreter = {}));
 export var GridInterpreter;
 (function (GridInterpreter) {
-    GridInterpreter["Alphabet"] = "ALPHABET";
-    GridInterpreter["Boolean"] = "BOOLEAN";
-    GridInterpreter["Normalized"] = "NORMALIZED";
-    GridInterpreter["Number"] = "NUMBER";
+    GridInterpreter["ALPHABET"] = "ALPHABET";
+    GridInterpreter["BOOLEAN"] = "BOOLEAN";
+    GridInterpreter["NORMALIZED"] = "NORMALIZED";
+    GridInterpreter["NUMBER"] = "NUMBER";
 })(GridInterpreter || (GridInterpreter = {}));
 export var ValidTypes;
 (function (ValidTypes) {
-    ValidTypes["Array"] = "ARRAY";
-    ValidTypes["Graph"] = "GRAPH";
-    ValidTypes["Grid"] = "GRID";
+    ValidTypes["ARRAY"] = "ARRAY";
+    ValidTypes["GRAPH"] = "GRAPH";
+    ValidTypes["GRID"] = "GRID";
 })(ValidTypes || (ValidTypes = {}));

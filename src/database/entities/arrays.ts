@@ -25,7 +25,7 @@ export class ArrayORM {
     @Column({
       type: "enum",
       enum: ArrayInterpreter,
-      default: ArrayInterpreter.Number
+      default: ArrayInterpreter.NUMBER
     })
     interpretAs: ArrayInterpreter
 }

@@ -43,10 +43,10 @@ export type AddProblemInput = {
 };
 
 export enum ArrayInterpreter {
-  Alphabet = 'ALPHABET',
-  Boolean = 'BOOLEAN',
-  Normalized = 'NORMALIZED',
-  Number = 'NUMBER'
+  ALPHABET = 'ALPHABET',
+  BOOLEAN = 'BOOLEAN',
+  NORMALIZED = 'NORMALIZED',
+  NUMBER = 'NUMBER'
 }
 
 export type ArrayType = {
@@ -79,10 +79,10 @@ export type Grid = {
 };
 
 export enum GridInterpreter {
-  Alphabet = 'ALPHABET',
-  Boolean = 'BOOLEAN',
-  Normalized = 'NORMALIZED',
-  Number = 'NUMBER'
+  ALPHABET = 'ALPHABET',
+  BOOLEAN = 'BOOLEAN',
+  NORMALIZED = 'NORMALIZED',
+  NUMBER = 'NUMBER'
 }
 
 export type Mutation = {
@@ -190,9 +190,9 @@ export type User = {
 };
 
 export enum ValidTypes {
-  Array = 'ARRAY',
-  Graph = 'GRAPH',
-  Grid = 'GRID'
+  ARRAY = 'ARRAY',
+  GRAPH = 'GRAPH',
+  GRID = 'GRID'
 }
 
 

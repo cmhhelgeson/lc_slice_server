@@ -13,4 +13,6 @@ generates:
         PositiveInt: number
         NonNegativeInt: number
         UUID: string
+      namingConvention:
+        enumValues: change-case-all#upperCase
 
