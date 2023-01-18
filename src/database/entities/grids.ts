@@ -1,8 +1,6 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
 import { GridInterpreter } from "../../__generated__/resolvers-types.js"
 
-
-
 @Entity({name: "grids"})
 @Unique(["problemNumber", "gridData"])
 export class GridORM {

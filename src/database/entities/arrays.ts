@@ -1,26 +1,26 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
-import { ArrayInterpreter, ArrayType} from "../../__generated__/resolvers-types.js"
+import { ArrayInterpreter} from "../../__generated__/resolvers-types.js"
 
 @Entity({name: "arrays"})
 @Unique(["problemNumber", "arrayData"])
 export class ArrayORM {
     @PrimaryGeneratedColumn("uuid")
-    arrayId: ArrayType["arrayId"]
+    arrayId: string
 
     @Column("int")
-    problemNumber: ArrayType["problemNumber"]
+    problemNumber: number
 
     @Column("int")
-    fromExample: ArrayType["fromExample"]
+    fromExample: number
 
     @Column("int")
-    exampleIndex: ArrayType["exampleIndex"]
+    exampleIndex: number
 
     @Column({length: 255})
-    label: ArrayType["label"]
+    label: string
 
     @Column("int", {array: true})
-    arrayData: ArrayType["arrayData"]
+    arrayData: number[]
 
     @Column({
       type: "enum",

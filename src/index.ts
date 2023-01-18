@@ -130,7 +130,7 @@ const resolvers: Resolvers = {
         grid.problemNumber = problemNumber
         grid.exampleIndex = 0;
         grid.fromExample = problem.numExamples;
-        grid.label = "Test Label";
+        grid.label = label;
         grid.interpretAs = interpretAs;
         await contextValue.dataSource.manager.save(grid);
         await contextValue.dataSource

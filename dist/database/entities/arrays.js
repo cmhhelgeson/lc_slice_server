@@ -13,27 +13,27 @@ let ArrayORM = class ArrayORM {
 };
 __decorate([
     PrimaryGeneratedColumn("uuid"),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], ArrayORM.prototype, "arrayId", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Object)
+    __metadata("design:type", Number)
 ], ArrayORM.prototype, "problemNumber", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Object)
+    __metadata("design:type", Number)
 ], ArrayORM.prototype, "fromExample", void 0);
 __decorate([
     Column("int"),
-    __metadata("design:type", Object)
+    __metadata("design:type", Number)
 ], ArrayORM.prototype, "exampleIndex", void 0);
 __decorate([
     Column({ length: 255 }),
-    __metadata("design:type", Object)
+    __metadata("design:type", String)
 ], ArrayORM.prototype, "label", void 0);
 __decorate([
     Column("int", { array: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Array)
 ], ArrayORM.prototype, "arrayData", void 0);
 __decorate([
     Column({
