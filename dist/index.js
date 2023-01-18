@@ -8,7 +8,7 @@ import pkg from "body-parser";
 const { json } = pkg;
 //NOTE: Node.js does not allow directory imports
 import { AppDataSource } from "./database/dataSource.js";
-import { execSchema } from 'execSchema/execSchema.js';
+import { execSchema } from './execSchema/execSchema.js';
 //Create Express app/server
 const app = express();
 const httpServer = http.createServer(app);
