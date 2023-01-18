@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import { ArrayORM } from "./entities/arrays.js";
 import { GridORM } from "./entities/grids.js";
 import { ProblemInfoORM } from "./entities/problemInfo.js";
 import { DATABASE_URL, PGPASSWORD, PGPORT, PGUSER, PGDATABASE, PGHOST } from "./environment/envVars.js";
-console.log(process.env);
 export const AppDataSource = new DataSource({
     url: process.env.DATABASE_URL || DATABASE_URL,
     type: "postgres",
@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     database: process.env.PGDATABASE || PGDATABASE,
     synchronize: false,
     logging: true,
-    entities: [GridORM, ProblemInfoORM],
+    entities: [GridORM, ProblemInfoORM, ArrayORM],
     migrations: [],
     subscribers: [],
 });

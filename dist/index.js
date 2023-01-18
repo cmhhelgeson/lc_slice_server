@@ -17,6 +17,7 @@ import { GridORM } from './database/entities/grids.js';
 import { ProblemInfoORM } from './database/entities/problemInfo.js';
 import { createProblemInfoORM } from './database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
+import { ArrayORM } from './database/entities/arrays.js';
 //Create Express app/server
 const app = express();
 const httpServer = http.createServer(app);
@@ -61,6 +62,9 @@ const resolvers = {
                     problemNumber: number
                 },
             });
+        },
+        arrays: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.manager.find(ArrayORM);
         }
     },
     Mutation: {
@@ -116,6 +120,34 @@ const resolvers = {
                 return grid;
             }
             throw new GraphQLError('Invalid problem number');
+        },
+        addArray: async (parent, args, contextValue, info) => {
+            const { problemNumber, data, example, interpretAs, label } = args.input;
+            console.log(example, label, interpretAs);
+            const problemRepo = await contextValue.dataSource.getRepository(ProblemInfoORM);
+            const problem = await problemRepo.findOne({
+                where: {
+                    problemNumber: problemNumber
+                }
+            });
+            if (problem) {
+                const arr = new ArrayORM();
+                arr.arrayData = data;
+                arr.problemNumber = problemNumber;
+                arr.exampleIndex = 0;
+                arr.fromExample = problem.numExamples;
+                arr.label = label;
+                arr.interpretAs = "NUMBER";
+                await contextValue.dataSource.manager.save(arr);
+                await contextValue.dataSource
+                    .createQueryBuilder()
+                    .update(ProblemInfoORM)
+                    .set({ numExamples: problem.numExamples + 1 })
+                    .where("problemNumber = :problemNumber", { problemNumber: problemNumber })
+                    .execute();
+                return arr;
+            }
+            throw new GraphQLError('Invalid problem number');
         }
     },
     User: {
@@ -145,6 +177,22 @@ const resolvers = {
                     }
                 });
             return validGrids;
+        },
+        arrays: async (parent, args, contextValue, info) => {
+            const { example } = args;
+            let validArrays = example !== undefined ?
+                await contextValue.dataSource.getRepository(ArrayORM).find({
+                    where: {
+                        problemNumber: parent.problemNumber,
+                        fromExample: args.example
+                    }
+                }) :
+                await contextValue.dataSource.getRepository(ArrayORM).find({
+                    where: {
+                        problemNumber: parent.problemNumber
+                    }
+                });
+            return validArrays;
         }
     }
 };

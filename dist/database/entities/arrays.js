@@ -8,49 +8,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Entity, Unique, PrimaryGeneratedColumn, Column } from "typeorm";
-export var GridInterpreter;
-(function (GridInterpreter) {
-    GridInterpreter["NUMBER"] = "NUMBER";
-    GridInterpreter["BOOLEAN"] = "BOOLEAN";
-    GridInterpreter["NORMALIZED"] = "NORMALIZED";
-    GridInterpreter["ALPHABET"] = "ALPHABET";
-})(GridInterpreter || (GridInterpreter = {}));
-let GridORM = class GridORM {
+export var ArrayInterpreter;
+(function (ArrayInterpreter) {
+    ArrayInterpreter["NUMBER"] = "NUMBER";
+    ArrayInterpreter["BOOLEAN"] = "BOOLEAN";
+    ArrayInterpreter["NORMALIZED"] = "NORMALIZED";
+    ArrayInterpreter["ALPHABET"] = "ALPHABET";
+})(ArrayInterpreter || (ArrayInterpreter = {}));
+let ArrayORM = class ArrayORM {
 };
 __decorate([
     PrimaryGeneratedColumn("uuid"),
     __metadata("design:type", String)
-], GridORM.prototype, "gridId", void 0);
+], ArrayORM.prototype, "arrayId", void 0);
 __decorate([
     Column("int"),
     __metadata("design:type", Number)
-], GridORM.prototype, "problemNumber", void 0);
+], ArrayORM.prototype, "problemNumber", void 0);
 __decorate([
     Column("int"),
     __metadata("design:type", Number)
-], GridORM.prototype, "fromExample", void 0);
+], ArrayORM.prototype, "fromExample", void 0);
 __decorate([
     Column("int"),
     __metadata("design:type", Number)
-], GridORM.prototype, "exampleIndex", void 0);
+], ArrayORM.prototype, "exampleIndex", void 0);
 __decorate([
     Column({ length: 255 }),
     __metadata("design:type", String)
-], GridORM.prototype, "label", void 0);
+], ArrayORM.prototype, "label", void 0);
 __decorate([
     Column("int", { array: true }),
     __metadata("design:type", Array)
-], GridORM.prototype, "gridData", void 0);
+], ArrayORM.prototype, "arrayData", void 0);
 __decorate([
     Column({
         type: "enum",
-        enum: GridInterpreter,
-        default: GridInterpreter.NUMBER
+        enum: ArrayInterpreter,
+        default: ArrayInterpreter.NUMBER
     }),
     __metadata("design:type", String)
-], GridORM.prototype, "interpretAs", void 0);
-GridORM = __decorate([
-    Entity({ name: "grids" }),
-    Unique(["problemNumber", "gridData"])
-], GridORM);
-export { GridORM };
+], ArrayORM.prototype, "interpretAs", void 0);
+ArrayORM = __decorate([
+    Entity({ name: "arrays" }),
+    Unique(["problemNumber", "arrayData"])
+], ArrayORM);
+export { ArrayORM };

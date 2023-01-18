@@ -50,6 +50,17 @@ type ProblemInfo {
   hasGrids: Boolean!
   hasArrays: Boolean!
   grids(example: NonNegativeInt): [Grid],
+  arrays(example: NonNegativeInt): [ArrayType],
+}
+
+type ArrayType {
+  arrayId: ID!
+  label: String
+  fromExample: NonNegativeInt!
+  exampleIndex: NonNegativeInt!
+  problemNumber: PositiveInt!
+  arrayData: [Int]
+  interpretAs: String!
 }
 
 type Example {
@@ -60,6 +71,7 @@ type Query {
   users: [User]
   posts: [Post]
   grids: [Grid]
+  arrays: [ArrayType]
   problem(number: Int): ProblemInfo
 }
 
@@ -73,6 +85,12 @@ enum ValidTypes {
 enum GridInterpreter {
   NUMBER 
   BOOLEAN 
+  NORMALIZED
+}
+
+enum ArrayInterpreter {
+  NUMBER
+  BOOLEAN
   NORMALIZED
 }
 
@@ -101,9 +119,18 @@ input AddGridInput {
   interpretAs: GridInterpreter
 }
 
+input AddArrayTypeInput {
+  problemNumber: PositiveInt!
+  data: [Int]!
+  example: NonNegativeInt
+  label: String
+  interpretAs: ArrayInterpreter
+}
+
 type Mutation {
   addProblem(input: AddProblemInput!): ProblemInfo
   updateDescription(input: UpdateDescriptionInput!): String
   updateTitle(input: UpdateTitleInput!): String
   addGrid(input: AddGridInput!): Grid
+  addArray(input: AddArrayTypeInput!): ArrayType
 }

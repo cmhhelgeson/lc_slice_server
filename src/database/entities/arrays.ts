@@ -1,17 +1,17 @@
 import {Entity, Unique, PrimaryGeneratedColumn, Column} from "typeorm"
 
-export enum GridInterpreter {
+export enum ArrayInterpreter {
   NUMBER = "NUMBER",
   BOOLEAN = "BOOLEAN",
   NORMALIZED = "NORMALIZED",
   ALPHABET = "ALPHABET"
 }
 
-@Entity({name: "grids"})
-@Unique(["problemNumber", "gridData"])
-export class GridORM {
+@Entity({name: "arrays"})
+@Unique(["problemNumber", "arrayData"])
+export class ArrayORM {
     @PrimaryGeneratedColumn("uuid")
-    gridId: string
+    arrayId: string
 
     @Column("int")
     problemNumber: number
@@ -26,15 +26,12 @@ export class GridORM {
     label: string
 
     @Column("int", {array: true})
-    gridData: number[][]
+    arrayData: number[]
 
     @Column({
       type: "enum",
-      enum: GridInterpreter,
-      default: GridInterpreter.NUMBER
+      enum: ArrayInterpreter,
+      default: ArrayInterpreter.NUMBER
     })
-    interpretAs: GridInterpreter
-
-    width: number
-    height: number
+    interpretAs: ArrayInterpreter
 }

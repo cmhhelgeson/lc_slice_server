@@ -19,6 +19,14 @@ export type Scalars = {
   UUID: string;
 };
 
+export type AddArrayTypeInput = {
+  data: Array<InputMaybe<Scalars['Int']>>;
+  example?: InputMaybe<Scalars['NonNegativeInt']>;
+  interpretAs?: InputMaybe<ArrayInterpreter>;
+  label?: InputMaybe<Scalars['String']>;
+  problemNumber: Scalars['PositiveInt'];
+};
+
 export type AddGridInput = {
   data: Array<InputMaybe<Array<InputMaybe<Scalars['Int']>>>>;
   example?: InputMaybe<Scalars['NonNegativeInt']>;
@@ -32,6 +40,23 @@ export type AddProblemInput = {
   description?: InputMaybe<Scalars['String']>;
   problemNumber: Scalars['PositiveInt'];
   title: Scalars['String'];
+};
+
+export enum ArrayInterpreter {
+  Boolean = 'BOOLEAN',
+  Normalized = 'NORMALIZED',
+  Number = 'NUMBER'
+}
+
+export type ArrayType = {
+  __typename?: 'ArrayType';
+  arrayData?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  arrayId: Scalars['ID'];
+  exampleIndex: Scalars['NonNegativeInt'];
+  fromExample: Scalars['NonNegativeInt'];
+  interpretAs: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
+  problemNumber: Scalars['PositiveInt'];
 };
 
 export type Example = {
@@ -60,10 +85,16 @@ export enum GridInterpreter {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addArray?: Maybe<ArrayType>;
   addGrid?: Maybe<Grid>;
   addProblem?: Maybe<ProblemInfo>;
   updateDescription?: Maybe<Scalars['String']>;
   updateTitle?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationAddArrayArgs = {
+  input: AddArrayTypeInput;
 };
 
 
@@ -99,6 +130,7 @@ export type Post = {
 
 export type ProblemInfo = {
   __typename?: 'ProblemInfo';
+  arrays?: Maybe<Array<Maybe<ArrayType>>>;
   description: Scalars['String'];
   grids?: Maybe<Array<Maybe<Grid>>>;
   hasArrays: Scalars['Boolean'];
@@ -111,12 +143,18 @@ export type ProblemInfo = {
 };
 
 
+export type ProblemInfoArraysArgs = {
+  example?: InputMaybe<Scalars['NonNegativeInt']>;
+};
+
+
 export type ProblemInfoGridsArgs = {
   example?: InputMaybe<Scalars['NonNegativeInt']>;
 };
 
 export type Query = {
   __typename?: 'Query';
+  arrays?: Maybe<Array<Maybe<ArrayType>>>;
   grids?: Maybe<Array<Maybe<Grid>>>;
   posts?: Maybe<Array<Maybe<Post>>>;
   problem?: Maybe<ProblemInfo>;
@@ -224,8 +262,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AddArrayTypeInput: AddArrayTypeInput;
   AddGridInput: AddGridInput;
   AddProblemInput: AddProblemInput;
+  ArrayInterpreter: ArrayInterpreter;
+  ArrayType: ResolverTypeWrapper<ArrayType>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   Example: ResolverTypeWrapper<Example>;
@@ -250,8 +291,10 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AddArrayTypeInput: AddArrayTypeInput;
   AddGridInput: AddGridInput;
   AddProblemInput: AddProblemInput;
+  ArrayType: ArrayType;
   Boolean: Scalars['Boolean'];
   EmailAddress: Scalars['EmailAddress'];
   Example: Example;
@@ -270,6 +313,17 @@ export type ResolversParentTypes = {
   UpdateDescriptionInput: UpdateDescriptionInput;
   UpdateTitleInput: UpdateTitleInput;
   User: User;
+};
+
+export type ArrayTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArrayType'] = ResolversParentTypes['ArrayType']> = {
+  arrayData?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
+  arrayId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  exampleIndex?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
+  fromExample?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
+  interpretAs?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  problemNumber?: Resolver<ResolversTypes['PositiveInt'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface EmailAddressScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
@@ -295,6 +349,7 @@ export type GridResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addArray?: Resolver<Maybe<ResolversTypes['ArrayType']>, ParentType, ContextType, RequireFields<MutationAddArrayArgs, 'input'>>;
   addGrid?: Resolver<Maybe<ResolversTypes['Grid']>, ParentType, ContextType, RequireFields<MutationAddGridArgs, 'input'>>;
   addProblem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, RequireFields<MutationAddProblemArgs, 'input'>>;
   updateDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<MutationUpdateDescriptionArgs, 'input'>>;
@@ -325,6 +380,7 @@ export type PostResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type ProblemInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProblemInfo'] = ResolversParentTypes['ProblemInfo']> = {
+  arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType, Partial<ProblemInfoArraysArgs>>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType, Partial<ProblemInfoGridsArgs>>;
   hasArrays?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -338,6 +394,7 @@ export type ProblemInfoResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
   problem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, Partial<QueryProblemArgs>>;
@@ -360,6 +417,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  ArrayType?: ArrayTypeResolvers<ContextType>;
   EmailAddress?: GraphQLScalarType;
   Example?: ExampleResolvers<ContextType>;
   Grid?: GridResolvers<ContextType>;
