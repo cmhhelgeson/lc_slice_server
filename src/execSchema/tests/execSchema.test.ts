@@ -6,7 +6,7 @@ import { AddProblemInput } from "__generated__/resolvers-types"
 describe("Test Server created with executable schema", () => {
 
   it('Adds a non-existant problem', () => {
-    const testServer = new ApolloServer({
+    const testServer = new ApolloServer<MyContext>({
       schema: execSchema,
       introspection: true,
     });
