@@ -1,4 +1,4 @@
-TODO: Finish TypeORM explanation in README.
+NOTE: Currently not in use until I can consistently pay for it.
 
 <h1>Disclaimer</h1>
 
