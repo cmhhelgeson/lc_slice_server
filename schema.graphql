@@ -51,6 +51,9 @@ type Query {
   grids: [Grid]
   arrays: [ArrayType]
   problem(number: Int): ProblemInfo
+  gridProblems: [ProblemInfo]
+  graphProblems: [ProblemInfo]
+  arrayProblems: [ProblemInfo]
 }
 
 

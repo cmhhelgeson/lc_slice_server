@@ -29,6 +29,21 @@ const resolvers = {
         },
         arrays: (parent, args, contextValue, info) => {
             return contextValue.dataSource.manager.find(ArrayORM);
+        },
+        gridProblems: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+                hasGrids: true,
+            });
+        },
+        graphProblems: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+                hasGraphs: true
+            });
+        },
+        arrayProblems: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+                hasArrays: true
+            });
         }
     },
     Mutation: {

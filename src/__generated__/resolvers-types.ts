@@ -145,7 +145,10 @@ export type ProblemInfoGridsArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  arrayProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
   arrays?: Maybe<Array<Maybe<ArrayType>>>;
+  graphProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
+  gridProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
   grids?: Maybe<Array<Maybe<Grid>>>;
   problem?: Maybe<ProblemInfo>;
 };
@@ -357,7 +360,10 @@ export type ProblemInfoResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  arrayProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType>;
+  graphProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
+  gridProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType>;
   problem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, Partial<QueryProblemArgs>>;
 };

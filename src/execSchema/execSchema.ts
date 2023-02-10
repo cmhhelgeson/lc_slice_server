@@ -44,6 +44,21 @@ const resolvers: Resolvers = {
     },
     arrays: (parent, args, contextValue: MyContext, info) => {
       return contextValue.dataSource.manager.find(ArrayORM)
+    },
+    gridProblems: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+        hasGrids: true,
+      })
+    },
+    graphProblems: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+        hasGraphs: true
+      })
+    },
+    arrayProblems: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
+        hasArrays: true
+      })
     }
   },
   Mutation: {

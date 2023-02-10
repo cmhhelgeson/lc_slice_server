@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "generate": "graphql-codegen --config codegen.yml",
-    "compile": "rimraf dist && npm run generate && shx cp -R ./schema.graphql ../frontend && tsc",
+    "compile": "rimraf dist && npm run generate && shx cp -R ./schema.graphql ../lc_slice/frontend && tsc",
     "startBuild": "npm run compile && node ./dist/index.js",
     "push": "npm run compile && git add ./dist && git commit -m 'Updated dist' && git push",
     "start": "node ./dist/index.js",
