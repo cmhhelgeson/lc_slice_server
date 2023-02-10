@@ -15,6 +15,8 @@ import {
   PGHOST
 } from "./environment/envVars.js"
 
+console.log(process)
+
 export const AppDataSource = new DataSource({
   url: process.env.DATABASE_URL || DATABASE_URL,
   type: "postgres",
