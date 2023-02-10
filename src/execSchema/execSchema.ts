@@ -46,18 +46,39 @@ const resolvers: Resolvers = {
       return contextValue.dataSource.manager.find(ArrayORM)
     },
     gridProblems: (parent, args, contextValue: MyContext, info) => {
-      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
-        hasGrids: true,
+      return contextValue.dataSource.getRepository(ProblemInfoORM).find({
+        order: {
+          problemNumber: {
+            direction: "ASC"
+          }
+        },
+        where: {
+          hasGrids: true
+        }
       })
     },
     graphProblems: (parent, args, contextValue: MyContext, info) => {
-      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
-        hasGraphs: true
+      return contextValue.dataSource.getRepository(ProblemInfoORM).find({
+        order: {
+          problemNumber: {
+            direction: "ASC"
+          }
+        },
+        where: {
+          hasGraphs: true
+        }
       })
     },
     arrayProblems: (parent, args, contextValue: MyContext, info) => {
-      return contextValue.dataSource.getRepository(ProblemInfoORM).findBy({
-        hasArrays: true
+      return contextValue.dataSource.getRepository(ProblemInfoORM).find({
+        order: {
+          problemNumber: {
+            direction: "ASC"
+          }
+        },
+        where: {
+          hasArrays: true
+        }
       })
     }
   },
