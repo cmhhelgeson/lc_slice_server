@@ -154,6 +154,12 @@ export type Query = {
 };
 
 
+export type QueryGridProblemsArgs = {
+  skip?: InputMaybe<Scalars['Int']>;
+  take?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryProblemArgs = {
   number?: InputMaybe<Scalars['Int']>;
 };
@@ -363,7 +369,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arrayProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType>;
   graphProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
-  gridProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
+  gridProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType, Partial<QueryGridProblemsArgs>>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType>;
   problem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, Partial<QueryProblemArgs>>;
 };

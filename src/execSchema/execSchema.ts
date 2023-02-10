@@ -46,6 +46,19 @@ const resolvers: Resolvers = {
       return contextValue.dataSource.manager.find(ArrayORM)
     },
     gridProblems: (parent, args, contextValue: MyContext, info) => {
+      const {take, skip} = args;
+      if (take !== 0 || take !== undefined) {
+        return contextValue.dataSource.getRepository(ProblemInfoORM).find({
+          order: {
+            problemNumber: {
+              direction: "ASC"
+            }
+          },
+          where: {
+            hasGrids: true
+          },
+        })
+      }
       return contextValue.dataSource.getRepository(ProblemInfoORM).find({
         order: {
           problemNumber: {
@@ -54,7 +67,9 @@ const resolvers: Resolvers = {
         },
         where: {
           hasGrids: true
-        }
+        },
+        take: take,
+        skip: skip
       })
     },
     graphProblems: (parent, args, contextValue: MyContext, info) => {
@@ -66,7 +81,9 @@ const resolvers: Resolvers = {
         },
         where: {
           hasGraphs: true
-        }
+        },
+        skip: 0,
+        take: 5
       })
     },
     arrayProblems: (parent, args, contextValue: MyContext, info) => {
