@@ -57,6 +57,8 @@ const resolvers: Resolvers = {
           where: {
             hasGrids: true
           },
+          take: take,
+          skip: skip
         })
       }
       return contextValue.dataSource.getRepository(ProblemInfoORM).find({
@@ -68,8 +70,6 @@ const resolvers: Resolvers = {
         where: {
           hasGrids: true
         },
-        take: take,
-        skip: skip
       })
     },
     graphProblems: (parent, args, contextValue: MyContext, info) => {
