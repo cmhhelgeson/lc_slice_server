@@ -59,6 +59,6 @@ export const SQLGetDataTypeProblems = (dataTypeTable, order) => {
     return `SELECT "problemNumber", title, description, "problemId", "numExamples"
   FROM "problemInfo"
   INNER JOIN "${dataTypeTable}" USING ("problemNumber")
-  GROUP BY "problemNumber", title, description
+  GROUP BY "problemNumber", title, description, "problemId", "numExamples"
   ORDER BY "problemNumber" ${order};`;
 };
