@@ -6,7 +6,7 @@ import { ProblemInfoORM } from '../database/entities/problemInfo.js';
 import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
-import { SQLGetDataTypeProblems } from 'database/databaseHelpers.js';
+import { SQLGetDataTypeProblems } from "../database/databaseHelpers.js";
 //Create typedefs and default resolver
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' });
 const getGridWidth = ({ gridData }) => {
