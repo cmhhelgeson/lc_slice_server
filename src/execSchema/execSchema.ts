@@ -13,6 +13,7 @@ import {ProblemInfoORM} from '../database/entities/problemInfo.js';
 import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
+import { SQLGetDataTypeProblems, SQLGetGridProblems } from 'database/databaseHelpers.js';
 
 export interface MyContext {
   dataSource: typeof AppDataSource
@@ -47,7 +48,8 @@ const resolvers: Resolvers = {
     },
     gridProblems: (parent, args, contextValue: MyContext, info) => {
       const {take, skip} = args;
-      if (take !== 0 || take !== undefined) {
+      return contextValue.dataSource.manager.query(SQLGetDataTypeProblems("grids", "ASC"));
+      /*if (take !== 0 || take !== undefined) {
         return contextValue.dataSource.getRepository(ProblemInfoORM).find({
           order: {
             problemNumber: {
@@ -70,7 +72,7 @@ const resolvers: Resolvers = {
         where: {
           hasGrids: true
         },
-      })
+      }) */
     },
     graphProblems: (parent, args, contextValue: MyContext, info) => {
       return contextValue.dataSource.getRepository(ProblemInfoORM).find({
