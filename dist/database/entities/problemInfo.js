@@ -30,18 +30,6 @@ __decorate([
     Column("int"),
     __metadata("design:type", Number)
 ], ProblemInfoORM.prototype, "numExamples", void 0);
-__decorate([
-    Column({ default: false }),
-    __metadata("design:type", Boolean)
-], ProblemInfoORM.prototype, "hasGraphs", void 0);
-__decorate([
-    Column({ default: false }),
-    __metadata("design:type", Boolean)
-], ProblemInfoORM.prototype, "hasGrids", void 0);
-__decorate([
-    Column({ default: false }),
-    __metadata("design:type", Boolean)
-], ProblemInfoORM.prototype, "hasArrays", void 0);
 ProblemInfoORM = __decorate([
     Entity({ name: "problemInfo" })
 ], ProblemInfoORM);

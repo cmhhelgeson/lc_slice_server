@@ -6,6 +6,7 @@ import { ProblemInfoORM } from '../database/entities/problemInfo.js';
 import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
+import { SQLGetDataTypeProblems } from 'database/databaseHelpers.js';
 //Create typedefs and default resolver
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' });
 const getGridWidth = ({ gridData }) => {
@@ -32,30 +33,7 @@ const resolvers = {
         },
         gridProblems: (parent, args, contextValue, info) => {
             const { take, skip } = args;
-            if (take !== 0 || take !== undefined) {
-                return contextValue.dataSource.getRepository(ProblemInfoORM).find({
-                    order: {
-                        problemNumber: {
-                            direction: "ASC"
-                        }
-                    },
-                    where: {
-                        hasGrids: true
-                    },
-                });
-            }
-            return contextValue.dataSource.getRepository(ProblemInfoORM).find({
-                order: {
-                    problemNumber: {
-                        direction: "ASC"
-                    }
-                },
-                where: {
-                    hasGrids: true
-                },
-                take: take,
-                skip: skip
-            });
+            return contextValue.dataSource.manager.query(SQLGetDataTypeProblems("grids", "ASC"));
         },
         graphProblems: (parent, args, contextValue, info) => {
             return contextValue.dataSource.getRepository(ProblemInfoORM).find({
@@ -63,9 +41,6 @@ const resolvers = {
                     problemNumber: {
                         direction: "ASC"
                     }
-                },
-                where: {
-                    hasGraphs: true
                 },
                 skip: 0,
                 take: 5
@@ -78,9 +53,6 @@ const resolvers = {
                         direction: "ASC"
                     }
                 },
-                where: {
-                    hasArrays: true
-                }
             });
         }
     },
