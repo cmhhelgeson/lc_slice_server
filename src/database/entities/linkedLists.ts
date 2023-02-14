@@ -34,4 +34,6 @@ export class LinkedListORM {
       default: LinkStatusEnum.FORWARD_LINKED
     })
     linkStatus: LinkStatusEnum
+
+    length: number
 }

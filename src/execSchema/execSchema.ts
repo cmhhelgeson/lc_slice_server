@@ -1,5 +1,5 @@
 import { link, readFileSync } from 'fs';
-import { Resolvers, Grid} from '__generated__/resolvers-types';
+import { Resolvers, Grid, LinkStatusEnum, LinkedListType} from '__generated__/resolvers-types';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { 
   typeDefs as scalarTypeDefs,
@@ -29,6 +29,10 @@ const getGridWidth = ({gridData}: Grid) : number => {
 
 const getGridHeight = ({gridData}: Grid): number => {
   return gridData.length;
+}
+
+const getListLength = ({listData}: LinkedListType): number => {
+  return listData.length;
 }
 
 const resolvers: Resolvers = {
@@ -75,7 +79,10 @@ const resolvers: Resolvers = {
       })
     },
     linkedListProblems: (parent, args, contextValue: MyContext, info) => {
-      return contextValue.dataSource.manager.query(SQLGetDataTypeProblems("linkedLists", "ASC"));
+      console.log(SQLGetDataTypeProblems("linkedLists", "ASC"));
+      const value = contextValue.dataSource.manager.query(SQLGetDataTypeProblems("linkedLists", "ASC"));
+      console.log(value);
+      return value;
     }
   },
   Mutation: {
@@ -205,6 +212,9 @@ const resolvers: Resolvers = {
   Grid: {
     width: getGridWidth,
     height: getGridHeight
+  },
+  LinkedListType: {
+    length: getListLength,
   },
   ProblemInfo: {
     grids: async (parent, args, contextValue: MyContext, info) => {

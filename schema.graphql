@@ -55,6 +55,7 @@ type LinkedListType {
   problemNumber: PositiveInt!
   listData: [Int]
   linkStatus: LinkStatusEnum
+  length: PositiveInt!
 }
 
 type Example {

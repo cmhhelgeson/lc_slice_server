@@ -104,6 +104,7 @@ export type LinkedListType = {
   exampleIndex: Scalars['NonNegativeInt'];
   fromExample: Scalars['NonNegativeInt'];
   label?: Maybe<Scalars['String']>;
+  length: Scalars['PositiveInt'];
   linkStatus?: Maybe<LinkStatusEnum>;
   listData?: Maybe<Array<Maybe<Scalars['Int']>>>;
   listId: Scalars['ID'];
@@ -370,6 +371,7 @@ export type LinkedListTypeResolvers<ContextType = any, ParentType extends Resolv
   exampleIndex?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
   fromExample?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
   label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  length?: Resolver<ResolversTypes['PositiveInt'], ParentType, ContextType>;
   linkStatus?: Resolver<Maybe<ResolversTypes['LinkStatusEnum']>, ParentType, ContextType>;
   listData?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
   listId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
