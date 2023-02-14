@@ -2,6 +2,7 @@ import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { ArrayORM } from "./entities/arrays.js"
 import { GridORM} from "./entities/grids.js"
+import { LinkedListORM } from "./entities/linkedLists.js"
 import { ProblemInfoORM } from "./entities/problemInfo.js"
 import { 
   psqlPassword, 
@@ -25,7 +26,7 @@ export const AppDataSource = new DataSource({
   database: process.env.PGDATABASE || PGDATABASE,
   synchronize: false,
   logging: true,
-  entities: [GridORM, ProblemInfoORM, ArrayORM],
+  entities: [GridORM, ProblemInfoORM, ArrayORM, LinkedListORM],
   migrations: [],
   subscribers: [],
 })

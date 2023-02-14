@@ -16,13 +16,4 @@ export class ProblemInfoORM {
 
     @Column("int")
     numExamples: number
-
-    @Column({default: false})
-    hasGraphs: boolean
-
-    @Column({default: false})
-    hasGrids: boolean
-
-    @Column({default: false})
-    hasArrays: boolean
 }

@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { link, readFileSync } from 'fs';
 import { Resolvers, Grid} from '__generated__/resolvers-types';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { 
@@ -13,7 +13,8 @@ import {ProblemInfoORM} from '../database/entities/problemInfo.js';
 import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
-import { SQLGetDataTypeProblems, SQLGetGridProblems } from 'database/databaseHelpers.js';
+import { SQLGetDataTypeProblems } from "../database/databaseHelpers.js"
+import { LinkedListORM } from 'database/entities/linkedLists.js';
 
 export interface MyContext {
   dataSource: typeof AppDataSource
@@ -32,9 +33,6 @@ const getGridHeight = ({gridData}: Grid): number => {
 
 const resolvers: Resolvers = {
   Query: {
-    grids: (parent, args, contextValue: MyContext, info) => {
-      return contextValue.dataSource.manager.find(GridORM);
-    }, 
     problem: (parent, args, contextValue: MyContext, info) => {
       const {number} = args;
       return contextValue.dataSource.getRepository(ProblemInfoORM).findOne({
@@ -43,36 +41,18 @@ const resolvers: Resolvers = {
         },
       })
     },
+    grids: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.manager.find(GridORM);
+    }, 
+    linkedLists: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.manager.find(LinkedListORM)
+    },
     arrays: (parent, args, contextValue: MyContext, info) => {
       return contextValue.dataSource.manager.find(ArrayORM)
     },
     gridProblems: (parent, args, contextValue: MyContext, info) => {
       const {take, skip} = args;
       return contextValue.dataSource.manager.query(SQLGetDataTypeProblems("grids", "ASC"));
-      /*if (take !== 0 || take !== undefined) {
-        return contextValue.dataSource.getRepository(ProblemInfoORM).find({
-          order: {
-            problemNumber: {
-              direction: "ASC"
-            }
-          },
-          where: {
-            hasGrids: true
-          },
-          take: take,
-          skip: skip
-        })
-      }
-      return contextValue.dataSource.getRepository(ProblemInfoORM).find({
-        order: {
-          problemNumber: {
-            direction: "ASC"
-          }
-        },
-        where: {
-          hasGrids: true
-        },
-      }) */
     },
     graphProblems: (parent, args, contextValue: MyContext, info) => {
       return contextValue.dataSource.getRepository(ProblemInfoORM).find({
@@ -80,9 +60,6 @@ const resolvers: Resolvers = {
           problemNumber: {
             direction: "ASC"
           }
-        },
-        where: {
-          hasGraphs: true
         },
         skip: 0,
         take: 5
@@ -95,10 +72,10 @@ const resolvers: Resolvers = {
             direction: "ASC"
           }
         },
-        where: {
-          hasArrays: true
-        }
       })
+    },
+    linkedListProblems: (parent, args, contextValue: MyContext, info) => {
+      return contextValue.dataSource.manager.query(SQLGetDataTypeProblems("linkedLists", "ASC"));
     }
   },
   Mutation: {
@@ -189,6 +166,38 @@ const resolvers: Resolvers = {
           )
           .execute();
         return arr;
+      }
+      throw new GraphQLError('Invalid problem number');
+    },
+    addLinkedList: async (parent, args, contextValue: MyContext, info) => {
+      const {problemNumber, data, example, linkStatus, label} = args.input
+      const problemRepo = await contextValue.dataSource.getRepository(ProblemInfoORM);
+
+      const problem = await problemRepo.findOne({
+        where: {
+          problemNumber: problemNumber
+        }
+      })
+      if (problem) {
+        const list = new LinkedListORM();
+        list.listData = data;
+        list.problemNumber = problemNumber
+        list.exampleIndex = 0;
+        list.fromExample = problem.numExamples;
+        list.label = label;
+        list.linkStatus = linkStatus;
+
+        await contextValue.dataSource.manager.save(list);
+        await contextValue.dataSource
+          .createQueryBuilder()
+          .update(ProblemInfoORM)
+          .set({numExamples: problem.numExamples + 1})
+          .where(
+            "problemNumber = :problemNumber", 
+            {problemNumber: problemNumber}
+          )
+          .execute();
+        return list;
       }
       throw new GraphQLError('Invalid problem number');
     }

@@ -35,6 +35,14 @@ export type AddGridInput = {
   problemNumber: Scalars['PositiveInt'];
 };
 
+export type AddLinkedListTypeInput = {
+  data: Array<InputMaybe<Scalars['Int']>>;
+  example?: InputMaybe<Scalars['NonNegativeInt']>;
+  label?: InputMaybe<Scalars['String']>;
+  linkStatus?: InputMaybe<LinkStatusEnum>;
+  problemNumber: Scalars['PositiveInt'];
+};
+
 export type AddProblemInput = {
   dataTypes?: InputMaybe<Array<InputMaybe<ValidTypes>>>;
   description?: InputMaybe<Scalars['String']>;
@@ -85,10 +93,29 @@ export enum GridInterpreter {
   NUMBER = 'NUMBER'
 }
 
+export enum LinkStatusEnum {
+  BACK_LINKED = 'BACK_LINKED',
+  DOUBLY_LINKED = 'DOUBLY_LINKED',
+  FORWARD_LINKED = 'FORWARD_LINKED',
+  UNLINKED = 'UNLINKED'
+}
+
+export type LinkedListType = {
+  __typename?: 'LinkedListType';
+  exampleIndex: Scalars['NonNegativeInt'];
+  fromExample: Scalars['NonNegativeInt'];
+  label?: Maybe<Scalars['String']>;
+  linkStatus?: Maybe<LinkStatusEnum>;
+  listData?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  listId: Scalars['ID'];
+  problemNumber: Scalars['PositiveInt'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addArray?: Maybe<ArrayType>;
   addGrid?: Maybe<Grid>;
+  addLinkedList?: Maybe<LinkedListType>;
   addProblem?: Maybe<ProblemInfo>;
   updateDescription?: Maybe<Scalars['String']>;
   updateTitle?: Maybe<Scalars['String']>;
@@ -102,6 +129,11 @@ export type MutationAddArrayArgs = {
 
 export type MutationAddGridArgs = {
   input: AddGridInput;
+};
+
+
+export type MutationAddLinkedListArgs = {
+  input: AddLinkedListTypeInput;
 };
 
 
@@ -124,9 +156,6 @@ export type ProblemInfo = {
   arrays?: Maybe<Array<Maybe<ArrayType>>>;
   description: Scalars['String'];
   grids?: Maybe<Array<Maybe<Grid>>>;
-  hasArrays: Scalars['Boolean'];
-  hasGraphs: Scalars['Boolean'];
-  hasGrids: Scalars['Boolean'];
   numExamples: Scalars['NonNegativeInt'];
   problemId: Scalars['UUID'];
   problemNumber: Scalars['PositiveInt'];
@@ -150,6 +179,8 @@ export type Query = {
   graphProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
   gridProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
   grids?: Maybe<Array<Maybe<Grid>>>;
+  linkedListProblems?: Maybe<Array<Maybe<ProblemInfo>>>;
+  linkedLists?: Maybe<Array<Maybe<LinkedListType>>>;
   problem?: Maybe<ProblemInfo>;
 };
 
@@ -251,6 +282,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   AddArrayTypeInput: AddArrayTypeInput;
   AddGridInput: AddGridInput;
+  AddLinkedListTypeInput: AddLinkedListTypeInput;
   AddProblemInput: AddProblemInput;
   ArrayInterpreter: ArrayInterpreter;
   ArrayType: ResolverTypeWrapper<ArrayType>;
@@ -261,6 +293,8 @@ export type ResolversTypes = {
   GridInterpreter: GridInterpreter;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  LinkStatusEnum: LinkStatusEnum;
+  LinkedListType: ResolverTypeWrapper<LinkedListType>;
   Mutation: ResolverTypeWrapper<{}>;
   NonNegativeInt: ResolverTypeWrapper<Scalars['NonNegativeInt']>;
   PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']>;
@@ -278,6 +312,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   AddArrayTypeInput: AddArrayTypeInput;
   AddGridInput: AddGridInput;
+  AddLinkedListTypeInput: AddLinkedListTypeInput;
   AddProblemInput: AddProblemInput;
   ArrayType: ArrayType;
   Boolean: Scalars['Boolean'];
@@ -286,6 +321,7 @@ export type ResolversParentTypes = {
   Grid: Grid;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  LinkedListType: LinkedListType;
   Mutation: {};
   NonNegativeInt: Scalars['NonNegativeInt'];
   PositiveFloat: Scalars['PositiveFloat'];
@@ -331,9 +367,21 @@ export type GridResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type LinkedListTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['LinkedListType'] = ResolversParentTypes['LinkedListType']> = {
+  exampleIndex?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
+  fromExample?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
+  label?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  linkStatus?: Resolver<Maybe<ResolversTypes['LinkStatusEnum']>, ParentType, ContextType>;
+  listData?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
+  listId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  problemNumber?: Resolver<ResolversTypes['PositiveInt'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addArray?: Resolver<Maybe<ResolversTypes['ArrayType']>, ParentType, ContextType, RequireFields<MutationAddArrayArgs, 'input'>>;
   addGrid?: Resolver<Maybe<ResolversTypes['Grid']>, ParentType, ContextType, RequireFields<MutationAddGridArgs, 'input'>>;
+  addLinkedList?: Resolver<Maybe<ResolversTypes['LinkedListType']>, ParentType, ContextType, RequireFields<MutationAddLinkedListArgs, 'input'>>;
   addProblem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, RequireFields<MutationAddProblemArgs, 'input'>>;
   updateDescription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<MutationUpdateDescriptionArgs, 'input'>>;
   updateTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<MutationUpdateTitleArgs, 'input'>>;
@@ -355,9 +403,6 @@ export type ProblemInfoResolvers<ContextType = any, ParentType extends Resolvers
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType, Partial<ProblemInfoArraysArgs>>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType, Partial<ProblemInfoGridsArgs>>;
-  hasArrays?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  hasGraphs?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  hasGrids?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   numExamples?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
   problemId?: Resolver<ResolversTypes['UUID'], ParentType, ContextType>;
   problemNumber?: Resolver<ResolversTypes['PositiveInt'], ParentType, ContextType>;
@@ -371,6 +416,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   graphProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
   gridProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType, Partial<QueryGridProblemsArgs>>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType>;
+  linkedListProblems?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProblemInfo']>>>, ParentType, ContextType>;
+  linkedLists?: Resolver<Maybe<Array<Maybe<ResolversTypes['LinkedListType']>>>, ParentType, ContextType>;
   problem?: Resolver<Maybe<ResolversTypes['ProblemInfo']>, ParentType, ContextType, Partial<QueryProblemArgs>>;
 };
 
@@ -383,6 +430,7 @@ export type Resolvers<ContextType = any> = {
   EmailAddress?: GraphQLScalarType;
   Example?: ExampleResolvers<ContextType>;
   Grid?: GridResolvers<ContextType>;
+  LinkedListType?: LinkedListTypeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   NonNegativeInt?: GraphQLScalarType;
   PositiveFloat?: GraphQLScalarType;

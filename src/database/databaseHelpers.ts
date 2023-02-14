@@ -87,11 +87,11 @@ export const constrainProblemNumberAndData = (tableName: string) => {
   return `ALTER TABLE ${tableName} ADD CONSTRAINT UNIQUE("problemNumber", "data")`
 }
 
-export const SQLGetDataTypeProblems = (dataTypeTable: "grids" | "arrays", order: "ASC" | "DESC") => {
-  return `SELECT "problemNumber", title, description
+export const SQLGetDataTypeProblems = (dataTypeTable: "grids" | "arrays" | "linkedLists", order: "ASC" | "DESC") => {
+  return `SELECT "problemNumber", title, description, "problemId", "numExamples"
   FROM "problemInfo"
   INNER JOIN "${dataTypeTable}" USING ("problemNumber")
-  GROUP BY "problemNumber", title, description
+  GROUP BY "problemNumber", title, description, "problemId", "numExamples"
   ORDER BY "problemNumber" ${order};`
 }
 

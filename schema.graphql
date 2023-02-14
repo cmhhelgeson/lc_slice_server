@@ -26,9 +26,6 @@ type ProblemInfo {
   title: String!
   description: String!
   numExamples: NonNegativeInt!
-  hasGraphs: Boolean!
-  hasGrids: Boolean!
-  hasArrays: Boolean!
   grids(example: NonNegativeInt): [Grid],
   arrays(example: NonNegativeInt): [ArrayType],
 }
@@ -43,6 +40,23 @@ type ArrayType {
   interpretAs: String!
 }
 
+enum LinkStatusEnum {
+  FORWARD_LINKED,
+  BACK_LINKED,
+  DOUBLY_LINKED,
+  UNLINKED
+}
+
+type LinkedListType {
+  listId: ID!
+  label: String
+  fromExample: NonNegativeInt!
+  exampleIndex: NonNegativeInt!
+  problemNumber: PositiveInt!
+  listData: [Int]
+  linkStatus: LinkStatusEnum
+}
+
 type Example {
   grids: [Grid]
 }
@@ -50,10 +64,12 @@ type Example {
 type Query {
   grids: [Grid]
   arrays: [ArrayType]
+  linkedLists: [LinkedListType]
   problem(number: Int): ProblemInfo
   gridProblems(take: Int, skip: Int): [ProblemInfo]
   graphProblems: [ProblemInfo]
   arrayProblems: [ProblemInfo]
+  linkedListProblems: [ProblemInfo]
 }
 
 
@@ -110,10 +126,19 @@ input AddArrayTypeInput {
   interpretAs: ArrayInterpreter
 }
 
+input AddLinkedListTypeInput {
+  problemNumber: PositiveInt!
+  data: [Int]!
+  example: NonNegativeInt
+  label: String
+  linkStatus: LinkStatusEnum
+}
+
 type Mutation {
   addProblem(input: AddProblemInput!): ProblemInfo
   updateDescription(input: UpdateDescriptionInput!): String
   updateTitle(input: UpdateTitleInput!): String
   addGrid(input: AddGridInput!): Grid
   addArray(input: AddArrayTypeInput!): ArrayType
+  addLinkedList(input: AddLinkedListTypeInput!): LinkedListType
 }
