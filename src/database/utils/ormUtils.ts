@@ -3,7 +3,7 @@ import { ProblemInfoORM } from "../entities/problemInfo.js"
 import { ValidTypes } from "../../__generated__/resolvers-types.js"
 
 export const createProblemInfoORM = (
-  {problemNumber, title, description, dataTypes}: AddProblemInput
+  {problemNumber, title, description}: AddProblemInput
 ): ProblemInfoORM => {
   const problem = new ProblemInfoORM();
   problem.problemNumber = problemNumber;

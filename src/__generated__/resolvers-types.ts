@@ -44,7 +44,6 @@ export type AddLinkedListTypeInput = {
 };
 
 export type AddProblemInput = {
-  dataTypes?: InputMaybe<Array<InputMaybe<ValidTypes>>>;
   description?: InputMaybe<Scalars['String']>;
   problemNumber: Scalars['PositiveInt'];
   title: Scalars['String'];
