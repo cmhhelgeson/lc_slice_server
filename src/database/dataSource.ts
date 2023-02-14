@@ -5,9 +5,6 @@ import { GridORM} from "./entities/grids.js"
 import { LinkedListORM } from "./entities/linkedLists.js"
 import { ProblemInfoORM } from "./entities/problemInfo.js"
 import { 
-  psqlPassword, 
-  psqlUsername, 
-  psqlDatabase,
   DATABASE_URL,
   PGPASSWORD,
   PGPORT,
@@ -24,7 +21,7 @@ export const AppDataSource = new DataSource({
   username: process.env.PGUSER || PGUSER,
   password: process.env.PGPASSWORD || PGPASSWORD,
   database: process.env.PGDATABASE || PGDATABASE,
-  synchronize: false,
+  synchronize: true,
   logging: true,
   entities: [GridORM, ProblemInfoORM, ArrayORM, LinkedListORM],
   migrations: [],
