@@ -170,7 +170,7 @@ const resolvers: Resolvers = {
       throw new GraphQLError('Invalid problem number');
     },
     addLinkedList: async (parent, args, contextValue: MyContext, info) => {
-      const {problemNumber, data, example, linkStatus, label} = args.input
+      const {problemNumber, data, linkStatus, label} = args.input
       const problemRepo = await contextValue.dataSource.getRepository(ProblemInfoORM);
 
       const problem = await problemRepo.findOne({
