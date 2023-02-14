@@ -1,5 +1,5 @@
 import { ProblemInfoORM } from "../entities/problemInfo.js";
-export const createProblemInfoORM = ({ problemNumber, title, description, dataTypes }) => {
+export const createProblemInfoORM = ({ problemNumber, title, description }) => {
     const problem = new ProblemInfoORM();
     problem.problemNumber = problemNumber;
     problem.title = title;

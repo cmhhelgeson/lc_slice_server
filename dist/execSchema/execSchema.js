@@ -7,6 +7,7 @@ import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
 import { SQLGetDataTypeProblems } from "../database/databaseHelpers.js";
+import { LinkedListORM } from '../database/entities/linkedLists.js';
 //Create typedefs and default resolver
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' });
 const getGridWidth = ({ gridData }) => {
@@ -15,11 +16,11 @@ const getGridWidth = ({ gridData }) => {
 const getGridHeight = ({ gridData }) => {
     return gridData.length;
 };
+const getListLength = ({ listData }) => {
+    return listData.length;
+};
 const resolvers = {
     Query: {
-        grids: (parent, args, contextValue, info) => {
-            return contextValue.dataSource.manager.find(GridORM);
-        },
         problem: (parent, args, contextValue, info) => {
             const { number } = args;
             return contextValue.dataSource.getRepository(ProblemInfoORM).findOne({
@@ -27,6 +28,12 @@ const resolvers = {
                     problemNumber: number
                 },
             });
+        },
+        grids: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.manager.find(GridORM);
+        },
+        linkedLists: (parent, args, contextValue, info) => {
+            return contextValue.dataSource.manager.find(LinkedListORM);
         },
         arrays: (parent, args, contextValue, info) => {
             return contextValue.dataSource.manager.find(ArrayORM);
@@ -54,6 +61,12 @@ const resolvers = {
                     }
                 },
             });
+        },
+        linkedListProblems: (parent, args, contextValue, info) => {
+            console.log(SQLGetDataTypeProblems("linkedLists", "ASC"));
+            const value = contextValue.dataSource.manager.query(SQLGetDataTypeProblems("linkedLists", "ASC"));
+            console.log(value);
+            return value;
         }
     },
     Mutation: {
@@ -137,11 +150,42 @@ const resolvers = {
                 return arr;
             }
             throw new GraphQLError('Invalid problem number');
+        },
+        addLinkedList: async (parent, args, contextValue, info) => {
+            const { problemNumber, data, linkStatus, label } = args.input;
+            const problemRepo = await contextValue.dataSource.getRepository(ProblemInfoORM);
+            const problem = await problemRepo.findOne({
+                where: {
+                    problemNumber: problemNumber
+                }
+            });
+            if (problem) {
+                const list = new LinkedListORM();
+                list.listData = data;
+                list.problemNumber = problemNumber;
+                list.exampleIndex = 0;
+                list.fromExample = problem.numExamples;
+                list.label = label;
+                list.linkStatus = linkStatus;
+                console.log(list);
+                await contextValue.dataSource.manager.save(list);
+                await contextValue.dataSource
+                    .createQueryBuilder()
+                    .update(ProblemInfoORM)
+                    .set({ numExamples: problem.numExamples + 1 })
+                    .where("problemNumber = :problemNumber", { problemNumber: problemNumber })
+                    .execute();
+                return list;
+            }
+            throw new GraphQLError('Invalid problem number');
         }
     },
     Grid: {
         width: getGridWidth,
         height: getGridHeight
+    },
+    LinkedListType: {
+        length: getListLength,
     },
     ProblemInfo: {
         grids: async (parent, args, contextValue, info) => {

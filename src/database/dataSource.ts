@@ -22,7 +22,7 @@ export const AppDataSource = new DataSource({
   username: process.env.PGUSER || PGUSER,
   password: process.env.PGPASSWORD || PGPASSWORD,
   database: process.env.PGDATABASE || PGDATABASE,
-  synchronize: true,
+  synchronize: false,
   logging: true,
   entities: [GridORM, ProblemInfoORM, ArrayORM, LinkedListORM],
   migrations: [],

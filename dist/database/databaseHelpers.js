@@ -62,3 +62,18 @@ export const SQLGetDataTypeProblems = (dataTypeTable, order) => {
   GROUP BY "problemNumber", title, description, "problemId", "numExamples"
   ORDER BY "problemNumber" ${order};`;
 };
+export const createLinkStatusEnum = () => {
+    return `CREATE TYPE "LinkStatusEnum" AS ENUM ('FORWARD_LINKED','BACK_LINKED','DOUBLY_LINKED','UNLINKED');`;
+};
+export const createLinkedListTable = () => {
+    return `CREATE TABLE "linkedLists" (
+    "listId" uuid DEFAULT gen_random_uuid(),
+    "problemNumber" INT,
+    "fromExample" INT,
+    "exampleIndex" INT,
+    "label" VARCHAR(255),
+    "listData" integer[],
+    "linkStatus" "linkStatusEnum"
+    @PrimaryGeneratedColumn("uuid")
+  );`;
+};

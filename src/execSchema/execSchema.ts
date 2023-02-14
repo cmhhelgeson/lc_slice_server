@@ -14,7 +14,7 @@ import { createProblemInfoORM } from '../database/utils/ormUtils.js';
 import { GraphQLError } from 'graphql';
 import { ArrayORM } from '../database/entities/arrays.js';
 import { SQLGetDataTypeProblems } from "../database/databaseHelpers.js"
-import { LinkedListORM } from 'database/entities/linkedLists.js';
+import { LinkedListORM } from '../database/entities/linkedLists.js';
 
 export interface MyContext {
   dataSource: typeof AppDataSource
@@ -193,6 +193,8 @@ const resolvers: Resolvers = {
         list.fromExample = problem.numExamples;
         list.label = label;
         list.linkStatus = linkStatus;
+
+        console.log(list);
 
         await contextValue.dataSource.manager.save(list);
         await contextValue.dataSource

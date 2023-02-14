@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "generate": "graphql-codegen --config codegen.yml",
-    "compile": "rimraf dist && npm run generate && shx cp -R ./schema.graphql ../lc_slice/frontend && shx cp -R ./src/database/databaseHelpers.ts ../lc_slice/frontend/src/database && tsc",
+    "compile": "rimraf dist && graphql-codegen --config codegen.yml && shx cp -R ./schema.graphql ../lc_slice/frontend && shx cp -R ./src/database/databaseHelpers.ts ../lc_slice/frontend/src/database && tsc",
     "startBuild": "npm run compile && node ./dist/index.js",
     "push": "npm run compile && git add ./dist && git commit -m 'Updated dist' && git push",
     "start": "node ./dist/index.js",

@@ -1,6 +1,3 @@
-export const psqlUsername = "postgres";
-export const psqlPassword = "$omeLove43571";
-export const psqlDatabase = "LC_Slice";
 export const PGDATABASE = "railway";
 export const PGHOST = "containers-us-west-145.railway.app";
 export const PGPASSWORD = "p03UMzZNVYOlp3Hgc0KQ";
