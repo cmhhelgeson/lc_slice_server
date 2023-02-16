@@ -188,13 +188,29 @@ const resolvers = {
         length: getListLength,
     },
     ProblemInfo: {
+        linkedLists: async (parent, args, contextValue, info) => {
+            const { example } = args;
+            let validGrids = example !== undefined ?
+                await contextValue.dataSource.getRepository(LinkedListORM).find({
+                    where: {
+                        problemNumber: parent.problemNumber,
+                        fromExample: example
+                    }
+                }) :
+                await contextValue.dataSource.getRepository(LinkedListORM).find({
+                    where: {
+                        problemNumber: parent.problemNumber
+                    }
+                });
+            return validGrids;
+        },
         grids: async (parent, args, contextValue, info) => {
             const { example } = args;
             let validGrids = example !== undefined ?
                 await contextValue.dataSource.getRepository(GridORM).find({
                     where: {
                         problemNumber: parent.problemNumber,
-                        fromExample: args.example
+                        fromExample: example
                     }
                 }) :
                 await contextValue.dataSource.getRepository(GridORM).find({

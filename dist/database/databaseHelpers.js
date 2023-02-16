@@ -77,3 +77,6 @@ export const createLinkedListTable = () => {
     @PrimaryGeneratedColumn("uuid")
   );`;
 };
+export const changeTableName = () => {
+    return `ALTER TABLE "linkedLists" RENAME TO "linkedLists"`;
+};

@@ -112,5 +112,9 @@ export const createLinkedListTable = () => {
   );`
 }
 
+export const changeTableName = () => {
+  return `ALTER TABLE "linkedLists" RENAME TO "linkedLists"`
+}
+
 
 

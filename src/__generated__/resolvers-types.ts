@@ -156,6 +156,7 @@ export type ProblemInfo = {
   arrays?: Maybe<Array<Maybe<ArrayType>>>;
   description: Scalars['String'];
   grids?: Maybe<Array<Maybe<Grid>>>;
+  linkedLists?: Maybe<Array<Maybe<LinkedListType>>>;
   numExamples: Scalars['NonNegativeInt'];
   problemId: Scalars['UUID'];
   problemNumber: Scalars['PositiveInt'];
@@ -169,6 +170,11 @@ export type ProblemInfoArraysArgs = {
 
 
 export type ProblemInfoGridsArgs = {
+  example?: InputMaybe<Scalars['NonNegativeInt']>;
+};
+
+
+export type ProblemInfoLinkedListsArgs = {
   example?: InputMaybe<Scalars['NonNegativeInt']>;
 };
 
@@ -404,6 +410,7 @@ export type ProblemInfoResolvers<ContextType = any, ParentType extends Resolvers
   arrays?: Resolver<Maybe<Array<Maybe<ResolversTypes['ArrayType']>>>, ParentType, ContextType, Partial<ProblemInfoArraysArgs>>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   grids?: Resolver<Maybe<Array<Maybe<ResolversTypes['Grid']>>>, ParentType, ContextType, Partial<ProblemInfoGridsArgs>>;
+  linkedLists?: Resolver<Maybe<Array<Maybe<ResolversTypes['LinkedListType']>>>, ParentType, ContextType, Partial<ProblemInfoLinkedListsArgs>>;
   numExamples?: Resolver<ResolversTypes['NonNegativeInt'], ParentType, ContextType>;
   problemId?: Resolver<ResolversTypes['UUID'], ParentType, ContextType>;
   problemNumber?: Resolver<ResolversTypes['PositiveInt'], ParentType, ContextType>;

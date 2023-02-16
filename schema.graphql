@@ -28,6 +28,7 @@ type ProblemInfo {
   numExamples: NonNegativeInt!
   grids(example: NonNegativeInt): [Grid],
   arrays(example: NonNegativeInt): [ArrayType],
+  linkedLists(example: NonNegativeInt): [LinkedListType]
 }
 
 type ArrayType {
