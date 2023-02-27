@@ -1,20 +1,11 @@
 import { ApolloServer } from '@apollo/server';
 import {expressMiddleware} from "@apollo/server/express4"
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { readFileSync } from 'fs';
-import {Resolvers, Grid, GridInterpreter, ArrayInterpreter} from '__generated__/resolvers-types';
 import http from 'http'
 import cors from "cors"
 import express from "express"
 import pkg from "body-parser"
 const {json} = pkg;
-import { addMocksToSchema } from '@graphql-tools/mock';
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { 
-  typeDefs as scalarTypeDefs,
-  resolvers as scalarResolvers,
-  mocks as scalarMocks,
-} from 'graphql-scalars';
 
 //NOTE: Node.js does not allow directory imports
 import { AppDataSource } from "./database/dataSource.js"
